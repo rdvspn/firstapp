@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <p id="status"></p>
+
+    <script>
+        // Function to get URL parameters
+        function getUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                userId: params.get("userId"),
+                transactionId: params.get("transactionId"),
+                code: params.get("code")
+            };
+        }
+
+        // Function to create the deep link
+        function createLink(userId, transactionId, code) {
+            const baseUrl = "selfie://";
+            const query = `?userId=${userId}&transactionId=${transactionId}&code=${code}`;
+            return baseUrl + query;
+        }
+
+        // Run when the document is ready
+        document.addEventListener("DOMContentLoaded", () => {
+            const { userId, transactionId, code } = getUrlParams();
+
+            if (userId && transactionId && code) {
+                // All required parameters are available
+                const appLink = createLink(userId, transactionId, code);
+
+                // Open the app link
+                window.location.href = appLink;
+                document.getElementById("status").innerText = "Opening the app...";
+            } else {
+                // Display a message if parameters are missing
+                document.getElementById("status").innerText = "Required parameters are missing.";
+            }
+        });
+    </script>
+</body>
+</html>
