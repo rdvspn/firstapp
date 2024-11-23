@@ -17,23 +17,23 @@
                 userId: params.get("userId"),
                 transactionId: params.get("transactionId"),
                 code: params.get("code"),
-                hash:params.get("hash"),
+               
             };
         }
 
         // Function to create the deep link
-        function createLink(userId, transactionId, code , hash) {
+        function createLink(userId, transactionId, code ) {
             const baseUrl = "selfie://";
-            const query = `?userId=${userId}&transactionId=${transactionId}&code=${code}&hash=${hash}`;
+            const query = `?userId=${userId}&transactionId=${transactionId}&code=${code}`;
             return baseUrl + query;
         }
 
         // Run when the document is ready
         document.addEventListener("DOMContentLoaded", () => {
-            const { userId, transactionId, code , hash} = getUrlParams();
+            const { userId, transactionId, code } = getUrlParams();
 
-            if (userId && transactionId && code &&  hash) {
-                const appLink = createLink(userId, transactionId, code , hash);
+            if (userId && transactionId && code ) {
+                const appLink = createLink(userId, transactionId, code );
 
                 // Open the app link
                 window.location.href = appLink;
